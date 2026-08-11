@@ -1,8 +1,191 @@
 Configuraciones - Ventana #3
 
+## Las Vlans a trabajar son las siguientes:
+!
+!
+vlan 2
+  name **Servers_II**
+  vn-segment 10002
+!
+vlan 10
+  name **DB**
+  vn-segment 100010
+!
+vlan 23
+  name LAN_ISILON
+  vn-segment 100023
+!
+vlan 100
+  name **Managemeant_Switchs**
+  vn-segment 1000100
+vlan 101
+  name **Managemeant_Servers**
+  vn-segment 1000101
+!
+vlan 457
+  name INTERNET_VPN_MPLS
+  vn-segment 1010457
+!
+vlan 500
+  name **Servers_I**
+  vn-segment 10001
+!
+vlan 600
+  vn-segment 1000600
+!
+vlan 660
+  name MPLS_MIAMI
+  vn-segment 1010660
+!
+vlan 800
+  vn-segment 1000800
+!
+!
+## Las interfaces SVI
+!
+!
+interface Vlan2
+  description **Servers II**   
+  no shutdown
+  vrf member OUTSIDE_TENANT
+  ip address 192.168.2.1/24 tag 54321
+  fabric forwarding mode anycast-gateway
+!
+interface Vlan10
+  description **DB**  
+  no shutdown
+  vrf member OUTSIDE_TENANT
+  ip address 192.168.10.1/24 tag 54321
+  fabric forwarding mode anycast-gateway
+!
+interface Vlan23
+  description LAN_ISILON 
+  no shutdown
+  vrf member OUTSIDE_TENANT
+  ip address 10.220.23.1/24 tag 54321
+  fabric forwarding mode anycast-gateway
+!
+interface Vlan100
+  description **Managemeant Switchs**   
+  vrf member OUTSIDE_TENANT
+  ip address 192.168.100.1/24 tag 54321
+  fabric forwarding mode anycast-gateway
+!
+interface Vlan101
+  description **Managemeant Servers**   
+  no shutdown
+  vrf member OUTSIDE_TENANT
+  no ip redirects
+  ip address 192.168.101.1/24 tag 54321
+  fabric forwarding mode anycast-gateway
+!
+interface Vlan500
+  description **Servers I**   
+  no shutdown
+  vrf member OUTSIDE_TENANT
+  no ip redirects
+  ip address 192.168.1.1/24 tag 54321
+  fabric forwarding mode anycast-gateway
+!
+interface Vlan660
+  description INTERCONEXION_MPLS_MIAMI   
+  no shutdown
+  vrf member OUTSIDE_TENANT
+  ip address 172.17.105.2/28 tag 54321
+  fabric forwarding mode anycast-gateway
+!
+!
+interface nve1
+  member vni 10002
+    ingress-replication protocol bgp
+  member vni 100010
+    ingress-replication protocol bgp
+  member vni 100023
+    ingress-replication protocol bgp
+  member vni 1000100
+    ingress-replication protocol bgp
+  member vni 1000101
+    ingress-replication protocol bgp
+  member vni 1000457
+    ingress-replication protocol bgp
+  member vni 1000500
+    ingress-replication protocol bgp
+  member vni 1000600
+    ingress-replication protocol bgp
+  member vni 1000660
+    ingress-replication protocol bgp
+  member vni 1000800
+    ingress-replication protocol bgp
+!
+!
+evpn
+  vni 10002 l2
+    rd auto
+    route-target both auto
+    route-target both auto evpn
+!
+  vni 100010 l2
+    rd auto
+    route-target both auto
+    route-target both auto evpn
+!
+  vni 100023 l2
+    rd auto
+    route-target both auto
+    route-target both auto evpn
+!
+  vni 1000100 l2
+    rd auto
+    route-target both auto
+    route-target both auto evpn
+!
+  vni 1000101 l2
+    rd auto
+    route-target both auto
+    route-target both auto evpn
+!
+  vni 1000457 l2
+    rd auto
+    route-target both auto
+    route-target both auto evpn
+!
+  vni 1000500 l2
+    rd auto
+    route-target both auto
+    route-target both auto evpn
+!
+  vni 1000600 l2
+    rd auto
+    route-target both auto
+    route-target both auto evpn
+!
+  vni 1000660 l2
+    rd auto
+    route-target both auto
+    route-target both auto evpn
+!
+  vni 1000800 l2
+    rd auto
+    route-target both auto
+    route-target both auto evpn
+!
+!
 # Configuraciones en POPA
 
 # Configuracion en S1-Leaf-1
 
 configure terminal
 !
+vlan 457
+ no vn-segment 1010457
+ vn-segment 1000457
+!
+vlan 500
+ no vn-segment 10001
+ vn-segment 1000500
+!
+vlan 660
+ no vn-segment 1010660
+ vn-segment 1000660
+!
+interface nve1
