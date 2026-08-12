@@ -189,3 +189,373 @@ vlan 660
  vn-segment 1000660
 !
 interface nve1
+ member vni 1000457
+ ingress-replication protocol bgp
+!
+ member vni 1000500
+ ingress-replication protocol bgp
+!
+ member vni 1000660
+ ingress-replication protocol bgp
+!
+vni 10002 l2
+ rd auto
+ route-target import auto
+ route-target export auto
+!
+vni 100010 l2
+ rd auto
+ route-target import auto
+ route-target export auto
+!
+vni 100023 l2
+ rd auto
+ route-target import auto
+ route-target export auto
+!
+vni 1000100 l2
+ rd auto
+ route-target import auto
+ route-target export auto
+!
+vni 1000101 l2
+ rd auto
+ route-target import auto
+ route-target export auto
+!
+vni 1000457 l2
+ rd auto
+ route-target import auto
+ route-target export auto
+!
+vni 1000500 l2
+ rd auto
+ route-target import auto
+ route-target export auto
+!
+vni 1000600 l2
+ rd auto
+ route-target import auto
+ route-target export auto
+!
+vni 1000660 l2
+ rd auto
+ route-target import auto
+ route-target export auto
+!
+vni 1000800 l2
+ rd auto
+ route-target import auto
+ route-target export auto
+!
+end
+write
+
+# Configuracion en S1-Leaf-2
+
+configure terminal
+!
+vlan 457
+ no vn-segment 1010457
+ vn-segment 1000457
+!
+vlan 500
+ no vn-segment 10001
+ vn-segment 1000500
+!
+vlan 660
+ no vn-segment 1010660
+ vn-segment 1000660
+!
+interface nve1
+ member vni 1000457
+ ingress-replication protocol bgp
+!
+ member vni 1000500
+ ingress-replication protocol bgp
+!
+ member vni 1000660
+ ingress-replication protocol bgp
+!
+vni 10002 l2
+ rd auto
+ route-target import auto
+ route-target export auto
+!
+vni 100010 l2
+ rd auto
+ route-target import auto
+ route-target export auto
+!
+vni 100023 l2
+ rd auto
+ route-target import auto
+ route-target export auto
+!
+vni 1000100 l2
+ rd auto
+ route-target import auto
+ route-target export auto
+!
+vni 1000101 l2
+ rd auto
+ route-target import auto
+ route-target export auto
+!
+vni 1000457 l2
+ rd auto
+ route-target import auto
+ route-target export auto
+!
+vni 1000500 l2
+ rd auto
+ route-target import auto
+ route-target export auto
+!
+vni 1000600 l2
+ rd auto
+ route-target import auto
+ route-target export auto
+!
+vni 1000660 l2
+ rd auto
+ route-target import auto
+ route-target export auto
+!
+vni 1000800 l2
+ rd auto
+ route-target import auto
+ route-target export auto
+!
+end
+write
+
+# Configuracion en S1-Border_Leaf-1
+
+configure terminal
+!
+!
+vlan 457
+ no vn-segment 1010457
+ vn-segment 1000457
+!
+vlan 500
+ no vn-segment 10001
+ vn-segment 1000500
+!
+vlan 660
+ no vn-segment 1010660
+ vn-segment 1000660
+!
+!
+interface nve1
+ member vni 1000457
+ ingress-replication protocol bgp
+ multisite ingress-replication
+!
+ member vni 1000500
+ ingress-replication protocol bgp
+ multisite ingress-replication
+!
+ member vni 1000660
+ ingress-replication protocol bgp
+ multisite ingress-replication
+!
+evpn
+  vni 1000457 l2
+    rd auto
+    route-target import auto
+    route-target export auto
+!
+  vni 1000500 l2
+    rd auto
+    route-target import auto
+    route-target export auto
+!
+  vni 1000660 l2
+    rd auto
+    route-target import auto
+    route-target export auto
+!
+  vni 1000800 l2
+    rd auto
+    route-target import auto
+    route-target export auto
+!
+end
+write
+
+# Configuracion en S1-Border_Leaf-2
+
+configure terminal
+!
+vlan 457
+ no vn-segment 1010457
+ vn-segment 1000457
+!
+vlan 500
+ no vn-segment 10001
+ vn-segment 1000500
+!
+vlan 660
+ no vn-segment 1010660
+ vn-segment 1000660
+!
+interface nve1
+member vni 1000457
+ ingress-replication protocol bgp
+ multisite ingress-replication
+member vni 1000500
+ ingress-replication protocol bgp
+ multisite ingress-replication
+member vni 1000660
+ ingress-replication protocol bgp
+ multisite ingress-replication
+!
+!
+evpn
+  vni 1000457 l2
+    rd auto
+    route-target import auto
+    route-target export auto
+!
+  vni 1000500 l2
+    rd auto
+    route-target import auto
+    route-target export auto
+!
+  vni 1000660 l2
+    rd auto
+    route-target import auto
+    route-target export auto
+!
+  vni 1000800 l2
+    rd auto
+    route-target import auto
+    route-target export auto
+!
+end
+write
+
+# Configuraciones en IFX
+
+# Configuracion en S2-Leaf-1
+
+configure terminal
+!
+vlan 457
+ no vn-segment 1010457
+ vn-segment 1000457
+!
+vlan 500
+ no vn-segment 10001
+ vn-segment 1000500
+!
+vlan 660
+ no vn-segment 1010660
+ vn-segment 1000660
+!
+interface nve1
+member vni 1000457
+    ingress-replication protocol bgp
+member vni 1000500
+    ingress-replication protocol bgp
+member vni 1000660
+    ingress-replication protocol bgp
+!
+evpn
+ vni 10002 l2
+  rd auto
+  route-target import auto
+  route-target export auto
+!
+ vni 100010 l2
+  rd auto
+  route-target import auto
+  route-target export auto
+!
+ vni 100023 l2
+  rd auto
+  route-target import auto
+  route-target export auto
+!
+ vni 1000100 l2
+  rd auto
+  route-target import auto
+  route-target export auto
+!
+ vni 1000101 l2
+  rd auto
+  route-target import auto
+  route-target export auto
+!
+ vni 1000457 l2
+  rd auto
+  route-target import auto
+  route-target export auto
+!
+ vni 1000500 l2
+  rd auto
+  route-target import auto
+  route-target export auto
+!
+ vni 1000600 l2
+  rd auto
+  route-target import auto
+  route-target export auto
+!
+ vni 1000660 l2
+  rd auto
+  route-target import auto
+  route-target export auto
+!
+ vni 1000800 l2
+  rd auto
+  route-target import auto
+  route-target export auto
+!
+end
+write
+
+# Configuracion en S2-Border_Leaf-2
+
+configure terminal
+!
+vlan 457
+ no vn-segment 1010457
+ vn-segment 1000457
+!
+vlan 500
+ no vn-segment 10001
+ vn-segment 1000500
+!
+vlan 660
+ no vn-segment 1010660
+ vn-segment 1000660
+!
+interface nve1
+member vni 1000457
+    ingress-replication protocol bgp
+member vni 1000500
+    ingress-replication protocol bgp
+member vni 1000660
+    ingress-replication protocol bgp
+!
+evpn
+ vni 1000457 l2
+  rd auto
+  route-target import auto
+  route-target export auto
+!
+ vni 1000500 l2
+  rd auto
+  route-target import auto
+  route-target export auto
+!
+ vni 1000660 l2
+  rd auto
+  route-target import auto
+  route-target export auto
+!
+end
+write
