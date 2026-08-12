@@ -1,1 +1,30 @@
+S1-BL-1
+Loopback0 10.101.101.13
+Loopback10 10.101.111.13
+Loopback100 10.101.102.1
 
+S1-BL-2
+Loopback0 10.101.101.14
+Loopback10 10.101.111.14
+Loopback100 10.101.102.1
+
+S1-LF-1
+Loopback0 10.101.101.11
+Loopback10 10.101.111.11
+
+S1-LF-2
+Loopback0 10.101.101.12
+Loopback10 10.101.111.12
+
+Loopback0 10.102.102.23
+Loopback10 10.102.222.23
+Loopback100 10.102.101.1
+
+S2-BL-2
+Loopback0 10.102.102.21
+Loopback10 10.102.222.21
+Loopback100 10.102.101.1
+
+S2-LF-1
+Loopback0 10.102.102.22
+Loopback10 10.102.222.22
